@@ -45,18 +45,18 @@ Respon Berhasil:
 ```
 API Lainnya:
 
-- GET Index halaman
+- GET (ambil) Index halaman
 ```bash
 curl -X GET http://localhost:3001/
 ```
 
-- GET all mahasiswas data
+- GET (ambil) semua daya mahasiswas
 ```bash
 curl -X GET http://localhost:3001/mahasiswa \
 -H "Authorization: Bearer 12345ABCDEF"
 ```
 
-- GET mahasiswa
+- GET (ambil) mahasiswa
 ```bash
 curl -X GET http://localhost:3001/mahasiswa/1 \
 -H "Authorization: Bearer 12345ABCDEF"
@@ -73,7 +73,7 @@ curl -X PUT http://localhost:3001/mahasiswa/1 \
 }'
 ```
 
-- DELETE mahasiswa data
+- DELETE (hapus) mahasiswa data
 ```bash
 curl -X DELETE http://localhost:3001/mahasiswa/1 \
 -H "Authorization: Bearer 12345ABCDEF"
@@ -88,7 +88,7 @@ curl -X DELETE http://localhost:3001/mahasiswa/1 \
 
 ### Vercel
 Vercel bisa menjalankan PHP lewat custom runtime open-source bernama [vercel-php](https://github.com/vercel-community/php)
-1. **Tambahkan file konfigurasi Vecel:**
+### 1. **Persiapkan file konfigurasi Vecel:**
 ```
 /api
   ├── index.php
@@ -114,16 +114,16 @@ require __DIR__ . "/../index.php";
   ]
 }
 ```
-2. Install Vercel CLI  
+### 2. Install Vercel CLI  
 Anda perlu [install NPM](https://www.google.com/search?q=install+node+package+manager+di+windows) (Node Package Manager) lebih dulu
 ```bash
 npm install -g vercel
 ```
-3. Login ke akunmu (pakai Github)
+### 3. Login ke akunmu (pakai Github)
 ```bash
 vercel login
 ```
-4. Deploy proyek
+### 4. Deploy proyek
 ```bash
 vercel
 ```
@@ -137,28 +137,37 @@ Akan ada konfigurasi (tekan saja enter):
 ? Want to modify these settings? no
 ```
 
-5. Vercel akan otomatis mendeteksi file **vercel.json** dan menggunakan runtime @vercel/php.
-Setelah selesai, kamu akan dapat URL publik seperti:
-```
+Vercel akan otomatis mendeteksi file **vercel.json** dan menggunakan runtime @vercel/php.
+Setelah selesai, kamu akan dapat URL publik `Domains` singkat seperti (lihat pada halaman proyek vercel):
+```bash
 https://rest-api.vercel.app
 ```
 
-6. **Database Postgres**
+### 6. **Database Postgres**
 
 Di halaman proyek vercel kalian, buka stores (contoh: **vercel.com/_nama-teams_/_nama-proyek_/stores**)
 - [Create Database]
+  - Pilih Provider: `Supabase (Postgres backend)`
   - Region: `Singapore`
-  - Public Env Variabel Prefix: `PG_`
+  - Public Env Variabel Prefix: `PG_` (bebas kasih prefix, ini biar rapi aja)
   - Instalation Plans: Free
 - [Continue]
-  - Database Name: `supabase-rest-api`
-- [Create]
-- Salin environment variabel ke `.env.local`
-- [Open In Supabase]
-- [New table]
-  - name: mahasiswa (id, nama [varchar], jurusan [varchar], created_at [timestamps now()])
+  - Database Name: `supabase-rest-api` (bebas kasih nama)
+- [Create] (akan memakan waktu load)
+- Selagi menunggu, buat file `.env.local` di folder proyek.
+- di web ketika selesai create, akan ada popup untuk koneksi ke supabase, langsung click [Connect] agar masuk ke config supabase.
+- Salin isi `.env.local` yang ada di config supabase ke `env.local` di folder proyek.
+- di halaman cnfig supabase, klik [Open In Supabase].
+- [Table Editor] -> [New table]
+  - **Name**: **"mahasiswa"** (nama tabel)
+  - Isi Kolom: 
+    - **"id"** (type [int], primary [check])
+    - **"created_at"** (type [timestamps], default [now()])
+    - **"jurusan"** (type [varchar])
 
-konfigurasi seperti ini (pakai `POSTGRES_URL_NON_POOLING`):
+- lihat kembali `env.local`, terdapat variabel dengan struktur `POSTGRES_URL_NON_POOLING`:`postgres://<username>:<password>@<host>:<port>/<database>?<options>`.
+
+- **(dalam proyek vercel) Buka Settings > Environment Variables** (url nya seperti ini **vercel.com/_nama-teams_/_nama-proyek_/settings/environment-variables**): Set variabel database berikut, sesuaikan dengan isi variabel `...URL_NON_POOLING` sebelumnya.  
 ```bash
 DB_TYPE: pgsql
 DB_HOST: aws-1-ap-southeast-1.pooler.supabase.com
@@ -167,17 +176,20 @@ DB_USER: postgres.itzxopxshpvcjotxxxxx
 DB_PASS: ETnWsKT1Q9xxxxx
 DB_SSLMODE: require
 ```
-**(dalam proyek vercel) Buka Settings > Environment Variables:** Tambahkan ke environment variabel proyek (letak di **vercel.com/_nama-teams_/_nama-proyek_/settings/environment-variables**) 
 
-- (opsional) Akses di HeidiSQL:
+- Jika sudah selesai setup variabel, sekarang coba deploy ulang.
+
+
+
+- (opsional) anda dapat akses database pakai HeidiSQL, ikuti config sebelumya, dan pakai config ini:
   - Network Type: **PostgreSQL (TCP/IP)**
   - Library: **libpq-12.dll**
 
-7. Test Deployment
+### 7. Test API link Deployment
 ```bash
-curl -X GET https://<url-deployment>.vercel.app/
+curl -X GET https://<url-domains>.vercel.app/
 
-curl -X GET http://<url-deployment>.vercel.app/mahasiswa \
+curl -X GET http://<url-domains>.vercel.app/mahasiswa \
 -H "Authorization: Bearer 12345ABCDEF"
 ```
 
