@@ -1,19 +1,34 @@
-https://rest-api-two-eta.vercel.app/
-
-curl -X GET https://rest-api-two-eta.vercel.app/ \
+curl -X POST http://localhost:3001/mahasiswa \
 -H "Authorization: Bearer 12345ABCDEF" \
--H "Content-Type: application/json"
+-H "Content-Type: application/json" \
+-d '{
+  "nama": "Andi Saputra",
+  "jurusan": "Teknik Informatika"
+}'
 
-curl -X GET https://rest-api-two-eta.vercel.app/mahasiswa \
+curl -X POST http://localhost:3001/mahasiswa ^
+-H "Authorization: Bearer 12345ABCDEF" ^
+-H "Content-Type: application/json" ^
+-d "{ \"nama\": \"Andi Saputra\", \"jurusan\": \"Teknik Informatika\" }"
+
+curl -X POST http://localhost:3001/mahasiswa `
+-H "Authorization: Bearer 12345ABCDEF" `
+-H "Content-Type: application/json" `
+-d '{ "nama": "Andi Saputra", "jurusan": "Teknik Informatika" }'
+
+curl -X GET http://localhost:3001/mahasiswa \
+-H "Authorization: Bearer 12345ABCDEF"
+
+curl -X GET http://localhost:3001/mahasiswa/1 \
+-H "Authorization: Bearer 12345ABCDEF"
+
+curl -X PUT http://localhost:3001/mahasiswa/1 \
 -H "Authorization: Bearer 12345ABCDEF" \
--H "Content-Type: application/json"
+-H "Content-Type: application/json" \
+-d '{
+  "nama": "Ahmad Syahroni",
+  "jurusan": "Tata Boga"
+}'
 
-curl -X GET http://localhost:3000/mahasiswa \
--H "Authorization: Bearer 12345ABCDEF" \
--H "Content-Type: application/json"
-
-https://rest-g4350lv7d-leo42nights-projects.vercel.app/
-
-curl -X GET https://rest-g4350lv7d-leo42nights-projects.vercel.app/ \
--H "Authorization: Bearer 12345ABCDEF" \
--H "Content-Type: application/json"
+curl -X DELETE http://localhost:3001/mahasiswa/1 \
+-H "Authorization: Bearer 12345ABCDEF"

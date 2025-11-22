@@ -1,5 +1,5 @@
 # Rest API
-Kelas PBO 2025, pertemuan ke-13 (7 Nov)
+Kelas PBO 2025, pertemuan ke-13 (7 Nov). [[Video Tutorial](#)]
 
 ## 1. Clone repo
 ```bash
@@ -51,6 +51,22 @@ Respon Berhasil:
   "message": "Data mahasiswa berhasil ditambahkan"
 }
 ```
+Jika menggunaan CMD:
+```bash
+curl -X POST http://localhost:3001/mahasiswa ^
+-H "Authorization: Bearer 12345ABCDEF" ^
+-H "Content-Type: application/json" ^
+-d "{ \"nama\": \"Andi Saputra\", \"jurusan\": \"Teknik Informatika\" }"
+```
+
+Jika menggunakan Powershell:
+```bash
+curl -X POST http://localhost:3001/mahasiswa `
+-H "Authorization: Bearer 12345ABCDEF" `
+-H "Content-Type: application/json" `
+-d '{ "nama": "Andi Saputra", "jurusan": "Teknik Informatika" }'
+```
+
 API Lainnya:
 
 - GET (ambil) Index halaman
@@ -212,14 +228,8 @@ curl -X POST https://<url-domain>.vercel.app/mahasiswa \
   "jurusan": "Teknik Informatika"
 }'
 ```
-Respon Berhasil:
-```json
-{
-  "message": "Data mahasiswa berhasil ditambahkan"
-}
-```
-API Lainnya:
 
+API Lainnya:
 - GET (ambil) Index halaman
 ```bash
 curl -X GET https://<url-domain>.vercel.app/
@@ -228,28 +238,5 @@ curl -X GET https://<url-domain>.vercel.app/
 - GET (ambil) semua daya mahasiswas
 ```bash
 curl -X GET https://<url-domain>.vercel.app/mahasiswa \
--H "Authorization: Bearer 12345ABCDEF"
-```
-
-- GET (ambil) mahasiswa
-```bash
-curl -X GET https://<url-domain>.vercel.app/mahasiswa/1 \
--H "Authorization: Bearer 12345ABCDEF"
-```
-
-- PUT (update) mahasiswa data
-```bash
-curl -X PUT https://<url-domain>.vercel.app/mahasiswa/1 \
--H "Authorization: Bearer 12345ABCDEF" \
--H "Content-Type: application/json" \
--d '{
-  "nama": "Ahmad Syahroni",
-  "jurusan": "Tata Boga"
-}'
-```
-
-- DELETE (hapus) mahasiswa data
-```bash
-curl -X DELETE https://<url-domain>.vercel.app/mahasiswa/1 \
 -H "Authorization: Bearer 12345ABCDEF"
 ```

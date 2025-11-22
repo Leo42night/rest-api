@@ -3,9 +3,9 @@ CREATE DATABASE IF NOT EXISTS `kampus_db`;
 USE `kampus_db`;
 
 DROP TABLE IF EXISTS `mahasiswa`;
-CREATE TABLE IF NOT EXISTS `mahasiswa` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nama` varchar(50) DEFAULT NULL,
-  `jurusan` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
+CREATE TABLE IF NOT EXISTS mahasiswa (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    jurusan VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
