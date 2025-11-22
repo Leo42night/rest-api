@@ -151,6 +151,14 @@ Setelah selesai, kamu akan dapat URL publik `Domains` singkat seperti (lihat pad
 https://rest-api.vercel.app
 ```
 
+#### Connect to Github
+Anda dapat mengkoneksikan proyek vercel ke github repo (agar tiap update di github, vercel otomatis update). Caranya:
+- (pada proyek vercel) Buka **Setting** (`vercel.com/<user>/<project>/settings`)
+- Buka **Git** (`vercel.com/<user>/<project>/settings/git`)
+- Koneksi ke Github repo untuk proyek ini
+
+Push perubahan ke github repo untuk melihat hasilnya.
+
 ### e. **Database Postgres**
 
 Di halaman proyek vercel kalian, buka stores (contoh: **vercel.com/_nama-teams_/_nama-proyek_/stores**)
